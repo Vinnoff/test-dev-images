@@ -25,7 +25,7 @@
         android:fadingEdge="vertical"
         android:fadingEdgeLength="24dp"
         android:requiresFadingEdge="vertical"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/images_search_confirm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

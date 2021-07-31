@@ -22,6 +22,8 @@ class ImagesViewModel(
     val liveDataImageList: LiveData<Event<GetImagesViewState>> get() = _liveDataImageList
     private val _liveDataImagesSelected: MutableLiveData<List<ImageData>> = MutableLiveData()
     val liveDataImagesSelected: LiveData<List<ImageData>> get() = _liveDataImagesSelected
+    private val _liveDataImageInfo: MutableLiveData<String> = MutableLiveData()
+    val liveDataImageInfo: LiveData<String> get() = _liveDataImageInfo
 
     private val imageList get() = (_liveDataImageList.value?.peekContent() as? GetImagesViewState.SUCCESS)?.data
     private var debounceJob: Job? = null
@@ -56,6 +58,10 @@ class ImagesViewModel(
         launch(CustomCoroutineExceptionHandler { _liveDataImageList.value = GetImagesViewState.ERROR.toEvent() }) {
             _liveDataImageList.value = getImageListUseCase.invoke(input).toViewState().toEvent()
         }
+    }
+
+    fun onImageSelected(position: Int) {
+        _liveDataImageInfo.value = liveDataImagesSelected.value?.getOrNull(position)?.designer
     }
 
     fun debounce(l: Long = 300L, function: suspend CoroutineScope.() -> Unit) {

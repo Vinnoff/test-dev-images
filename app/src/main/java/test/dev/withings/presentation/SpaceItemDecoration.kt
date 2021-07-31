@@ -6,18 +6,19 @@ import androidx.annotation.Px
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 class SpaceItemDecoration(@Px private val spacing: Int, private val includeEdge: Boolean = true) : RecyclerView.ItemDecoration() {
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         when (parent.layoutManager) {
-            is GridLayoutManager -> outRect.setForGrid(parent, view)
+            is GridLayoutManager, is StaggeredGridLayoutManager -> outRect.setForGrid(parent, view)
             is LinearLayoutManager -> outRect.setForLinear(parent, view)
         }
     }
 
     private fun Rect.setForGrid(parent: RecyclerView, view: View) {
         val position = parent.getChildAdapterPosition(view) // item position
-        val spanCount = (parent.layoutManager as GridLayoutManager).spanCount
+        val spanCount = (parent.layoutManager as? GridLayoutManager)?.spanCount ?: (parent.layoutManager as StaggeredGridLayoutManager).spanCount
         val column = position % spanCount // item column
         if (includeEdge) {
             left = spacing - column * spacing / spanCount // spacing - column * ((1f / spanCount) * spacing)
