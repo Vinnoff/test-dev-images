@@ -1,5 +1,7 @@
 package test.dev.withings.data.repo
 
-interface ImagesRepository {
+import test.dev.withings.data.remote.response.ImagesResponse
 
+interface ImagesRepository {
+    suspend fun getImages(queries: List<String>): ImagesResponse?
 }

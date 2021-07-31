@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="test.dev.withings">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".WithingsApplication"
@@ -27,7 +28,7 @@
                 android:value="androidx.startup" />
         </provider>
         <activity
-            android:name=".presentation.MainActivity"
+            android:name=".presentation.images.ImagesActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
