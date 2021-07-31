@@ -13,6 +13,7 @@ class ImagesSearchFragment : BaseFragment(R.layout.images_search_fragment) {
 
     override fun initUI() {
         images_search_list.adapter = imagesAdapter
+        images_search_confirm.setOnClickListener { imagesViewModel.onConfirmSelection() }
     }
 
     override fun initObserver() {

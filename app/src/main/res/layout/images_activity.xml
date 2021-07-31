@@ -3,5 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/image_fragment_container"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent"
     tools:layout="@layout/images_search_fragment" />
