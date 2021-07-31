@@ -1,17 +1,18 @@
-package test.dev.withings.presentation.images.search
+package test.dev.withings.presentation.images.selection
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isGone
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.images_item.view.*
 import test.dev.withings.R
 import test.dev.withings.common.utils.load
 import test.dev.withings.domain.entity.image.ImageData
 
-class ImagesAdapter(val onImage: (id: Int) -> Unit) : RecyclerView.Adapter<ImagesAdapter.ViewHolder>() {
-    private val _data = arrayListOf<ImageDataView>()
-    var data: List<ImageDataView>
+class ImagesPresentationAdapter() : RecyclerView.Adapter<ImagesPresentationAdapter.ViewHolder>() {
+    private val _data = arrayListOf<ImageData>()
+    var data: List<ImageData>
         get() = _data
         set(value) {
             _data.clear()
@@ -28,16 +29,15 @@ class ImagesAdapter(val onImage: (id: Int) -> Unit) : RecyclerView.Adapter<Image
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         _data[position].let { data ->
-            holder.bind(data.data, data.selected)
+            holder.bind(data)
         }
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(content: ImageData, isSelected: Boolean) = with(itemView) {
+        fun bind(content: ImageData) = with(itemView) {
             result_image.load(content.previewUrl)
             result_name.text = content.designer
-            result_check.isChecked = isSelected
-            result_check.setOnClickListener { onImage(content.id) }
+            result_check.isGone
         }
     }
 }

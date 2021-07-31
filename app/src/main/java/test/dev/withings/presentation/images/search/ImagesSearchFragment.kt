@@ -1,10 +1,11 @@
 package test.dev.withings.presentation.images.search
 
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import kotlinx.android.synthetic.main.images_search_fragment.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import test.dev.withings.R
-import test.dev.withings.domain.entity.image.ImageData
 import test.dev.withings.presentation.BaseFragment
 import test.dev.withings.presentation.images.ImagesViewModel
 
@@ -19,17 +20,31 @@ class ImagesSearchFragment : BaseFragment(R.layout.images_search_fragment) {
     }
 
     override fun initObserver() {
-        imagesViewModel.liveDataImageList.observe(this) { viewState ->
-            showLoader(viewState is GetImagesViewState.LOADER)
-            when (viewState) {
-                is GetImagesViewState.EMPTY -> showError("No Data")
-                is GetImagesViewState.ERROR -> showError()
-                is GetImagesViewState.SUCCESS -> handleData(viewState.data)
+        imagesViewModel.liveDataImageList.observe(this) { event ->
+            event.getContentIfNotHandled()?.let { viewState ->
+                hideError()
+                showLoader(viewState is GetImagesViewState.LOADER)
+                when (viewState) {
+                    is GetImagesViewState.EMPTY -> showError(getString(R.string.no_data_found))
+                    is GetImagesViewState.ERROR -> showError(getString(R.string.error_text))
+                    is GetImagesViewState.SUCCESS -> handleData(viewState.data)
+                }
             }
         }
     }
 
-    private fun handleData(data: List<ImageData>) {
+    private fun handleData(data: MutableList<ImageDataView>) {
+        images_search_list.isVisible = true
         imagesAdapter.data = data
+    }
+
+    override fun showError(errorText: String?) {
+        images_search_list.isInvisible = true
+        images_search_error.text = errorText
+        images_search_error.isVisible = true
+    }
+
+    fun hideError() {
+        images_search_error.isVisible = false
     }
 }

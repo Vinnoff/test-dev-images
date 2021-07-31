@@ -32,7 +32,7 @@ abstract class BaseActivity(@LayoutRes val layoutRes: Int) : AppCompatActivity()
 
     protected fun goToFragment(fragment: Fragment, idFragment: Int, addToBackStack: Boolean = true) {
         supportFragmentManager.beginTransaction().apply {
-            replace(idFragment, fragment)
+            add(idFragment, fragment)
             if (addToBackStack) addToBackStack(null)
             commit()
         }

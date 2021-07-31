@@ -27,6 +27,18 @@
         app:spanCount="2"
         tools:listitem="@layout/images_item" />
 
+    <TextView
+        android:id="@+id/images_search_error"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@id/images_search_confirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/images_search_input" />
+
     <Button
         android:id="@+id/images_search_confirm"
         android:layout_width="0dp"

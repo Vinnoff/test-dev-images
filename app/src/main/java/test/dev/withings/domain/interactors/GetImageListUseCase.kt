@@ -2,16 +2,16 @@ package test.dev.withings.domain.interactors
 
 import test.dev.withings.data.remote.response.HitResponse
 import test.dev.withings.data.repo.ImagesRepository
+import test.dev.withings.domain.entity.image.GetImageEntity
 import test.dev.withings.domain.entity.image.ImageData
-import test.dev.withings.presentation.images.search.GetImagesViewState
 
 class GetImageListUseCase(private val imagesRepository: ImagesRepository) {
-    suspend fun invoke(input: String): GetImagesViewState {
+    suspend fun invoke(input: String): GetImageEntity {
         val entities = imagesRepository.getImages(input.replace(" ", "+"))?.hits?.mapNotNull { it.toEntity() }
         return when {
-            entities == null -> GetImagesViewState.ERROR
-            entities.isEmpty() -> GetImagesViewState.EMPTY
-            else -> GetImagesViewState.SUCCESS(entities)
+            entities == null -> GetImageEntity.ERROR
+            entities.isEmpty() -> GetImageEntity.EMPTY
+            else -> GetImageEntity.SUCCESS(entities)
         }
     }
 }

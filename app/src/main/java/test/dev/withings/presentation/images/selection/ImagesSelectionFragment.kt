@@ -5,11 +5,10 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import test.dev.withings.R
 import test.dev.withings.presentation.BaseFragment
 import test.dev.withings.presentation.images.ImagesViewModel
-import test.dev.withings.presentation.images.search.ImagesAdapter
 
 class ImagesSelectionFragment : BaseFragment(R.layout.images_selection_fragment) {
     private val imagesViewModel: ImagesViewModel by sharedViewModel()
-    private val imagesAdapter by lazy { ImagesAdapter { id -> imagesViewModel.onImageClickedClicked(id) } }
+    private val imagesAdapter by lazy { ImagesPresentationAdapter() }
 
     override fun initUI() {
         images_selection_list.adapter = imagesAdapter
