@@ -4,9 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
     android:background="@color/white">
 
     <EditText
+        android:hint="@string/search_keyword"
         android:id="@+id/images_search_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -46,7 +49,7 @@
         android:id="@+id/images_search_confirm"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Confirmer"
+        android:text="@string/_confirm"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"

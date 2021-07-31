@@ -2,4 +2,6 @@
     <string name="app_name">Withings Test App</string>
     <string name="no_data_found">Aucun résultat trouvé</string>
     <string name="error_text">Une erreur est survenue</string>
+    <string name="search_keyword">Tapez quelques mots clés</string>
+    <string name="_confirm">Confirmer</string>
 </resources>
