@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import test.dev.withings.BuildConfig
 
@@ -27,5 +28,13 @@ abstract class BaseActivity(@LayoutRes val layoutRes: Int) : AppCompatActivity()
 
     open fun showError(errorText: String? = null) {
         if (BuildConfig.DEBUG) Toast.makeText(this, errorText ?: "Error", Toast.LENGTH_SHORT).show()
+    }
+
+    protected fun goToFragment(fragment: Fragment, idFragment: Int, addToBackStack: Boolean = true) {
+        supportFragmentManager.beginTransaction().apply {
+            replace(idFragment, fragment)
+            if (addToBackStack) addToBackStack(null)
+            commit()
+        }
     }
 }
