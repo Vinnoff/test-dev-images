@@ -1,5 +1,6 @@
 package test.dev.withings.presentation.images.search
 
+import androidx.core.widget.doOnTextChanged
 import kotlinx.android.synthetic.main.images_search_fragment.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import test.dev.withings.R
@@ -12,6 +13,7 @@ class ImagesSearchFragment : BaseFragment(R.layout.images_search_fragment) {
     private val imagesAdapter by lazy { ImagesAdapter { id -> imagesViewModel.onImageClickedClicked(id) } }
 
     override fun initUI() {
+        images_search_input.doOnTextChanged { input, _, _, _ -> imagesViewModel.onSearch(input.toString()) }
         images_search_list.adapter = imagesAdapter
         images_search_confirm.setOnClickListener { imagesViewModel.onConfirmSelection() }
     }

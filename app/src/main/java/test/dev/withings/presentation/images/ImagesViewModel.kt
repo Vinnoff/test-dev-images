@@ -27,10 +27,7 @@ class ImagesViewModel(
 
     init {
         _liveDataNavigation.value = ImagesNavigation.SEARCH.toEvent()
-        _liveDataImageList.value = GetImagesViewState.LOADER
-        launch(CustomCoroutineExceptionHandler { _liveDataImageList.value = GetImagesViewState.ERROR }) {
-            _liveDataImageList.value = getImageListUseCase.invoke(emptyList())
-        }
+        getImages("")
     }
 
     fun onImageClickedClicked(id: Int) {
@@ -40,5 +37,16 @@ class ImagesViewModel(
     fun onConfirmSelection() {
         _liveDataNavigation.value = ImagesNavigation.SELECTION.toEvent()
         _liveDataImagesSelected.value = (_liveDataImageList.value as? GetImagesViewState.SUCCESS)?.data?.filter { idList.contains(it.id) }
+    }
+
+    fun onSearch(input: String) {
+        getImages(input)
+    }
+
+    private fun getImages(input: String) {
+        _liveDataImageList.value = GetImagesViewState.LOADER
+        launch(CustomCoroutineExceptionHandler { _liveDataImageList.value = GetImagesViewState.ERROR }) {
+            _liveDataImageList.value = getImageListUseCase.invoke(input)
+        }
     }
 }

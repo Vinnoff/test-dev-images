@@ -6,8 +6,8 @@ import test.dev.withings.domain.entity.image.ImageData
 import test.dev.withings.presentation.images.search.GetImagesViewState
 
 class GetImageListUseCase(private val imagesRepository: ImagesRepository) {
-    suspend fun invoke(queries: List<String>): GetImagesViewState {
-        val entities = imagesRepository.getImages(queries)?.hits?.mapNotNull { it.toEntity() }
+    suspend fun invoke(input: String): GetImagesViewState {
+        val entities = imagesRepository.getImages(input.replace(" ", "+"))?.hits?.mapNotNull { it.toEntity() }
         return when {
             entities == null -> GetImagesViewState.ERROR
             entities.isEmpty() -> GetImagesViewState.EMPTY
