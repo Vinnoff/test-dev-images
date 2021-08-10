@@ -33,7 +33,7 @@ class ImagesViewModel(
         getImages("")
     }
 
-    fun onImageClickedClicked(id: Int) {
+    fun onImageClicked(id: Int) {
         _liveDataImageList.value = imageList?.let { list ->
             list[list.indexOfFirst { id == it.data.id }].apply {
                 selected = !selected

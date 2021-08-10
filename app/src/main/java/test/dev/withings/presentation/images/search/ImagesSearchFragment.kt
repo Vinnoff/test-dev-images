@@ -14,7 +14,7 @@ import test.dev.withings.presentation.images.ImagesViewModel
 
 class ImagesSearchFragment : BaseFragment(R.layout.images_search_fragment) {
     private val imagesViewModel: ImagesViewModel by sharedViewModel()
-    private val imagesAdapter by lazy { ImagesAdapter { id -> imagesViewModel.onImageClickedClicked(id) } }
+    private val imagesAdapter by lazy { ImagesAdapter { id -> imagesViewModel.onImageClicked(id) } }
 
     override fun initUI() {
         hideKeyboard()

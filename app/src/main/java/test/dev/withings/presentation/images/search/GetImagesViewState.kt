@@ -12,7 +12,14 @@ sealed class GetImagesViewState {
 
 class ImageDataView(
     val data: ImageData, var selected: Boolean = false
-)
+) {
+    override fun equals(other: Any?) = data == (other as? ImageDataView)?.data
+            && selected == (other as? ImageDataView)?.selected
+
+    override fun toString(): String {
+        return "$data | $selected"
+    }
+}
 
 fun GetImageEntity.toViewState(): GetImagesViewState {
     return when (this) {
