@@ -44,7 +44,7 @@ class ImagesSearchFragment : BaseFragment(R.layout.images_search_fragment) {
 
     private fun handleData(data: MutableList<ImageDataView>) {
         images_search_list.isVisible = true
-        imagesAdapter.data = data
+        imagesAdapter.submitList(data)
     }
 
     override fun showError(errorText: String?) {
